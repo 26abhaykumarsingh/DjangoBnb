@@ -1,6 +1,6 @@
 const SearchFilters = () => {
   return (
-    <div className="h-[48px] lg:h-[64px] flex flex-row items-center justify-between border border-gray-300 rounded-full">
+    <div className="h-[48px] lg:h-[64px] flex flex-row items-center justify-between border border-gray-300 rounded-full shadow-xl">
       <div className="hidden lg:block">
         <div className="flex flex-row items-center justify-between">
           <div className="cursor-pointer w-[250px] h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
