@@ -230,8 +230,8 @@ const AddPropertyModal = () => {
               >
                 {error}
               </div>
-            )
-          }}
+              )
+          })}
 
           <CustomButton
             label="Previous"
