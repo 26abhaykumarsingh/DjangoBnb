@@ -64,6 +64,14 @@ const UserNav = ({ userId } : UserNavProps) => {
                   router.push('/myproperties')
                 }}
               />
+              <MenuLink
+                label="My reservations"
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push('/myreservations')
+                }}
+              />
+
               <LogoutButton />
             </>
           ) : (
