@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import PropertyListItem from "@/app/components/properties/PropertyListItem"
 import useSearchModal from "@/app/hooks/useSearchModal"
 import { format } from "date-fns"
+import { useSearchParams } from "next/navigation"
 
 export type PropertyType = {
   id: string;
@@ -21,6 +22,7 @@ interface PropertyListProps {
 }
 
 const PropertyList = ({ landlord_id, favorites }: PropertyListProps) => {
+  const params = useSearchParams();
   const searchModal = useSearchModal();
   const country = searchModal.query.country;
   const numGuests = searchModal.query.guests;
@@ -111,7 +113,7 @@ const PropertyList = ({ landlord_id, favorites }: PropertyListProps) => {
 
   useEffect(() => {
     getProperties();
-  }, [category, searchModal.query]);
+  }, [category, searchModal.query, params]);
 
   return (
     <>

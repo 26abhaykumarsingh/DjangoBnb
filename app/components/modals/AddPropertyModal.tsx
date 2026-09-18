@@ -67,7 +67,7 @@ const AddPropertyModal = () => {
       if (response.success) {
         console.log('SUCCESS :-D');
 
-        router.push('/');
+        router.push('/?added=True');
 
         addPropertyModal.close();
       } else {
