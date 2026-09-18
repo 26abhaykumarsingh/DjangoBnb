@@ -1,12 +1,13 @@
 "use client";
 
-import useSearchModal from "@/app/hooks/useSearchModal";
+import useSearchModal, { SearchQuery } from "@/app/hooks/useSearchModal";
 import Modal from "./Modal";
 import SelectCountry, { SelectCountryValue } from "../forms/SelectCountry";
 import DatePicker from "../forms/Calendar";
 import { useState } from "react";
 import CustomButton from "../forms/CustomButton";
 import { Range } from "react-date-range";
+import { SearchParams } from "next/dist/server/request/search-params";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -24,6 +25,17 @@ const SearchModal = () => {
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const closeAndSearch = () => {
+    const newSearchQuery: SearchQuery = {
+      country: country?.label,
+      checkIn: dateRange.startDate,
+      checkOut: dateRange.endDate,
+      guests: parseInt(numGuests),
+      bedrooms: parseInt(numBedrooms),
+      bathrooms: parseInt(numBathrooms),
+      category: '',
+    }
+
+    searchModal.setQuery(newSearchQuery);
     searchModal.close();
   }
 
