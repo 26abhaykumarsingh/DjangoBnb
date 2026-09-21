@@ -4,28 +4,37 @@ import useSearchModal from "@/app/hooks/useSearchModal";
 
 const SearchFilters = () => {
   const searchModal = useSearchModal();
+
+  const formatDate = (date: Date): string => {
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'short' });
+
+    return `${day} ${month}`;
+  };
+
+  formatDate(searchModal.query.checkIn);
   return (
     <div onClick={() => searchModal.open('location')} className="h-[48px] lg:h-[64px] flex flex-row items-center justify-between border border-gray-300 rounded-full shadow-xl">
       <div className="hidden lg:block">
         <div className="flex flex-row items-center justify-between">
           <div className="cursor-pointer w-[250px] h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
             <p className="text-xs font-semibold">Where</p>
-            <p className="text-sm">Wanted location</p>
+            <p className="text-sm">{searchModal.query.country ? `${searchModal.query.country}` : 'Search destinations'}</p>
           </div>
 
           <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
             <p className="text-xs font-semibold">Check in</p>
-            <p className="text-sm">Add dates</p>
+            <p className="text-sm">{searchModal.query.checkIn ? `${formatDate(searchModal.query.checkIn)}` : 'Add date'}</p>
           </div>
 
           <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
             <p className="text-xs font-semibold">Check out</p>
-            <p className="text-sm">Add dates</p>
+            <p className="text-sm">{searchModal.query.checkOut ? `${formatDate(searchModal.query.checkOut)}` : 'Add date'}</p>
           </div>
 
           <div className="cursor-pointer h-[48px] lg:h-[64px] px-8 flex flex-col justify-center rounded-full hover:bg-gray-100">
             <p className="text-xs font-semibold">Who</p>
-            <p className="text-sm">Add guests</p>
+            <p className="text-sm">{searchModal.query.guests ? `${searchModal.query.guests}` : 'Add guests'}</p>
           </div>
         </div>
       </div>
