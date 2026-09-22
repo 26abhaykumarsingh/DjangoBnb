@@ -8,7 +8,7 @@ import Link from "next/link";
 const Navbar = async () => {
   const userId = await getUserId();
   return (
-    <nav className="w-full fixed top-0 left-0 py-6 border-b border-gray-300 bg-white z-10">
+    <nav className="w-full fixed top-0 left-0 py-6 bg-gradient-to-b from-white via-white to-gray-50/50 border-b border-black/[0.06] z-10">
       <div className="max-w-[1500px] mx-auto px-6">
         <div className="flex justify-between items-center">
           <Link href="/">

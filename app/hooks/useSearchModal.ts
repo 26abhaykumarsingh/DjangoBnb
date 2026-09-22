@@ -29,7 +29,7 @@ const useSearchModal = create<SearchModalStore>((set) => ({
     country: '',
     checkIn: undefined,
     checkOut: undefined,
-    guests: 1,
+    guests: 0,
     bathrooms: 0,
     bedrooms: 0,
     category: '',
