@@ -1,3 +1,5 @@
+'use client';
+
 import { getUserId } from "../lib/actions";
 import apiService from "../services/apiService";
 import React, { useState, useEffect } from 'react';

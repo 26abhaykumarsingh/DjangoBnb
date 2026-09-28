@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import apiService from '@/app/services/apiService';
 import ConversationDetail from "@/app/components/inbox/ConversationDetail";
