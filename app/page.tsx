@@ -1,16 +1,19 @@
+import { Suspense } from "react";
 import Categories from "@/app/components/Categories";
 import PropertyList from "@/app/components/properties/PropertyList";
 
 export default function Home() {
   return (
     <main className="max-w-[1500px] mx-auto px-6">
-      <div className="w-full flex justify-center">
-        <Categories />
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="w-full flex justify-center">
+          <Categories />
+        </div>
 
-      <div className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-        <PropertyList />
-      </div>
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <PropertyList />
+        </div>
+      </Suspense>
     </main>
   );
 }
