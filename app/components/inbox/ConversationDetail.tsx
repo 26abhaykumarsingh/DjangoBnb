@@ -13,7 +13,7 @@ interface ConversationDetailProps {
 }
 
 const ConversationDetail = ({ conversation, userId, token, messages }: ConversationDetailProps) => {
-  const messagesDiv = useRef(null);
+  const messagesDiv = useRef<HTMLDivElement>(null);
   const [newMessage, setNewMessage] = useState('');
   const myUser = conversation.users?.find((user) => user.id == userId);
   const otherUser = conversation.users?.find((user) => user.id != userId); // userId is my userId
