@@ -16,7 +16,7 @@ const PropertyDetailPage = async ({params}: {params: Promise<{ id: string }>}) =
           fill
           src={property.image_url}
           className="object-cover w-full h-full"
-          alt="Beach house"
+          alt={property.title}
         />
       </div>
 
