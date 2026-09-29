@@ -10,6 +10,7 @@ import Categories from "../addProperty/Categories";
 import SelectCountry, { SelectCountryValue } from "../forms/SelectCountry";
 import apiService from "@/app/services/apiService";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const AddPropertyModal = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -66,12 +67,14 @@ const AddPropertyModal = () => {
 
       if (response.success) {
         console.log('SUCCESS :-D');
+        toast.success("Property created successfully!");
 
         router.push('/?added=True');
 
         addPropertyModal.close();
       } else {
         console.log('Error');
+        toast.error("Creation failed. Please try again.");
 
         const tmpErrors: string[] = Object.values(response).map((error: any) => {
           return error;

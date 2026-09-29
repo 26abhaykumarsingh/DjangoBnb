@@ -2,9 +2,32 @@ import Image from "next/image";
 
 import apiService from "../services/apiService";
 import Link from "next/link";
+import { getUserId } from "../lib/actions";
 
 const MyReservationsPage = async () => {
+  const userId = await getUserId();
+
+  if (!userId) {
+      return (
+        <main className="max-w-[1500px] mx-auto px-6 py-12 flex flex-col items-center justify-center mt-20">
+          <p className="text-xl text-gray-600 mb-6">You need to be authenticated to view your reservations.</p>
+          <Link href="/" className="px-6 py-3 bg-airbnb text-white rounded-xl hover:bg-rose-600 transition">
+            Return Home
+          </Link>
+        </main>
+      );
+  }
+
   const reservations = await apiService.get('/api/auth/myreservations/')
+
+  if (!reservations || !Array.isArray(reservations)) {
+    return (
+      <main className="max-w-[1500px] mx-auto px-6 py-12">
+        <h1 className="my-6 text-2xl">My reservations</h1>
+        <p className="text-gray-600">No reservations found or unable to load data.</p>
+      </main>
+    );
+  }
 
   return (
     <main className="max-w-[1500px] mx-auto px-6 pb-6">

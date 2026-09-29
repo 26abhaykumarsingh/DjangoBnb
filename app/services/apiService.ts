@@ -15,15 +15,22 @@ const apiService = {
           'Authorization': `Bearer ${token}`
         }
       })
-        .then(response => response.json())
-        .then((json) => {
+      .then(response => {
+        if (!response.ok) {
+          reject(`Error: ${response.status}`);
+          return;
+        }
+        return response.json();
+      })
+      .then((json) => {
+        if (json) {
           console.log('Response:', json);
-
           resolve(json);
-        })
-        .catch(error => {
-          reject(error);
-        })
+        }
+      })
+      .catch(error => {
+        reject(error);
+      });
     })
   },
 
@@ -40,15 +47,22 @@ const apiService = {
           'Authorization': `Bearer ${token}`
         }
       })
-        .then(response => response.json())
-        .then((json) => {
+      .then(response => {
+        if (!response.ok) {
+          reject(`Error: ${response.status}`);
+          return;
+        }
+        return response.json();
+      })
+      .then((json) => {
+        if (json) {
           console.log('Response:', json);
-
           resolve(json);
-        })
-        .catch(error => {
-          reject(error);
-        })
+        }
+      })
+      .catch(error => {
+        reject(error);
+      });
     })
   },
 
@@ -64,15 +78,22 @@ const apiService = {
           'Content-Type': 'application/json',
         }
       })
-        .then(response => response.json())
-        .then((json) => {
+      .then(response => {
+        if (!response.ok) {
+          reject(`Error: ${response.status}`);
+          return;
+        }
+        return response.json();
+      })
+      .then((json) => {
+        if (json) {
           console.log('Response:', json);
-
           resolve(json);
-        })
-        .catch(error => {
-          reject(error);
-        })
+        }
+      })
+      .catch(error => {
+        reject(error);
+      });
     })
   },
 }

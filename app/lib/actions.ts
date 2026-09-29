@@ -37,6 +37,13 @@ export async function resetAuthCookies() {
 
 export async function getUserId() {
   const cookieStore = await cookies();
+  const accessToken = cookieStore.get('session_access_token')?.value;
+
+  // If there is no access token, treat the user as logged out
+  if (!accessToken) {
+    return null;
+  }
+
   return cookieStore.get('session_userid')?.value ?? null;
 }
 

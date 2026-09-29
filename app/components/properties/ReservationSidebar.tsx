@@ -7,6 +7,7 @@ import { differenceInDays, eachDayOfInterval, format } from 'date-fns';
 import apiService from '@/app/services/apiService';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import DatePicker from '../forms/Calendar';
+import toast from 'react-hot-toast';
 
 const initialDateRange = {
   startDate: new Date(),
@@ -51,8 +52,10 @@ const ReservationSidebar = ({ property, userId }: ReservationSidebarProps) => {
         const response = await apiService.post(`/api/properties/${property.id}/book/`, formData)
 
         if (response.success) {
+          toast.success("Booking successful!")
           console.log('Booking successful');
         } else {
+          toast.error("Booking failed. Please try again.")
           console.log('Something went wrong...');
         }
       }

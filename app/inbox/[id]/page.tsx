@@ -6,6 +6,7 @@ import ConversationDetail from "@/app/components/inbox/ConversationDetail";
 import { getUserId } from "@/app/lib/actions";
 import { UserType } from '../page';
 import { getAccessToken } from '@/app/lib/actions';
+import Link from 'next/link';
 
 export type MessageType = {
   id: string;
@@ -23,10 +24,13 @@ const ConversationPage = async ( {params} : {params: Promise<{id: string}>}) => 
 
   if (!userId || !token) {
     return (
-      <main className="max-w-[1500px] max-auto px-6 py-12">
-        <p>You need to be authenticated...</p>
+      <main className="max-w-[1500px] mx-auto px-6 py-12 flex flex-col items-center justify-center mt-20">
+        <p className="text-xl text-gray-600 mb-6">You need to be authenticated to view your conversations.</p>
+        <Link href="/" className="px-6 py-3 bg-airbnb text-white rounded-xl hover:bg-rose-600 transition">
+          Return Home
+        </Link>
       </main>
-    )
+    );
   }
 
   const conversation = await apiService.get(`/api/chat/${id}/`)

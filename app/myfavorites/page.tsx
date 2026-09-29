@@ -1,3 +1,4 @@
+import Link from "next/link";
 import PropertyList from "../components/properties/PropertyList";
 import { getUserId } from "../lib/actions";
 
@@ -6,10 +7,13 @@ const MyFavoritesPage = async () => {
 
   if (!userId) {
     return (
-      <main className="max-w-[1500px] max-auto px-6 py-12">
-        <p>You need to be authenticated...</p>
+      <main className="max-w-[1500px] mx-auto px-6 py-12 flex flex-col items-center justify-center mt-20">
+        <p className="text-xl text-gray-600 mb-6">You need to be authenticated to view your favorite properties.</p>
+        <Link href="/" className="px-6 py-3 bg-airbnb text-white rounded-xl hover:bg-rose-600 transition">
+          Return Home
+        </Link>
       </main>
-    )
+    );
   }
 
   return (

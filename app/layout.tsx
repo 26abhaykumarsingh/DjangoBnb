@@ -7,6 +7,7 @@ import LoginModal from "@/app/components/modals/LoginModal";
 import SignupModal from "@/app/components/modals/SignupModal";
 import AddPropertyModal from "./components/modals/AddPropertyModal";
 import SearchModal from "./components/modals/SearchModal";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const content = <p>lksdjkf</p>;
-
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -32,6 +31,16 @@ export default function RootLayout({
         <SearchModal />
         <SignupModal />
         <AddPropertyModal />
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#333",
+              color: "#fff",
+            },
+          }}
+        />
       </body>
     </html>
   );
