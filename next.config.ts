@@ -7,9 +7,8 @@ const nextConfig: NextConfig = {
     unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: '137.23.43.24',
-        port: '8000',
+        protocol: 'https',
+        hostname: 'djangobnb.duckdns.org',
         pathname: '/**'
       }
     ]
