@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
   // If the access token is missing/expired, but we still have a refresh token
   if (!accessToken && refreshToken) {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/token/refresh/`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_HOSTL}/api/auth/token/refresh/`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
