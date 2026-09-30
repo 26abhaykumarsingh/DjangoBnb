@@ -124,7 +124,6 @@ const PropertyList = ({ landlord_id, favorites }: PropertyListProps) => {
     console.log({ params });
   }, [category, searchModal.query, params]);
 
-  // Loading State with local cat image
     if (isLoading) {
       return (
         <div className="col-span-full flex flex-col items-center justify-center text-center">
@@ -141,7 +140,6 @@ const PropertyList = ({ landlord_id, favorites }: PropertyListProps) => {
       );
     }
 
-    // Empty State with local cat image
     if (properties.length === 0) {
       console.log("NO PROPERTIES")
       return (
