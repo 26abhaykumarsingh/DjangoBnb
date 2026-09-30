@@ -7,6 +7,7 @@ import PropertyListItem from "@/app/components/properties/PropertyListItem"
 import useSearchModal from "@/app/hooks/useSearchModal"
 import { format } from "date-fns"
 import { useSearchParams } from "next/navigation"
+import Image from "next/image"
 
 export type PropertyType = {
   id: string;
@@ -31,7 +32,9 @@ const PropertyList = ({ landlord_id, favorites }: PropertyListProps) => {
   const checkinDate = searchModal.query.checkIn;
   const checkoutDate = searchModal.query.checkOut;
   const category = searchModal.query.category;
+
   const [properties, setProperties] = useState<PropertyType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const markFavorite = (id: string, is_favorite: boolean) => {
     const tmpProperties = properties.map((property: PropertyType) => {
@@ -52,6 +55,7 @@ const PropertyList = ({ landlord_id, favorites }: PropertyListProps) => {
   }
 
   const getProperties = async () => {
+    setIsLoading(true);
     let url = '/api/properties/';
 
     if (landlord_id) {
@@ -91,29 +95,70 @@ const PropertyList = ({ landlord_id, favorites }: PropertyListProps) => {
 
       if (urlQuery.length) {
         console.log('Query: ', urlQuery);
-
-        urlQuery = '?' + urlQuery.substring(1); // remove first  '&'
-
+        urlQuery = '?' + urlQuery.substring(1);
         url += urlQuery;
       }
     }
 
-    const tmpProperties = await apiService.get(url)
+    try {
+      const tmpProperties = await apiService.get(url)
 
-    setProperties(tmpProperties.data.map((property: PropertyType) => {
-      if (tmpProperties.favorites.includes(property.id)) {
-        property.is_favorite = true
-      } else {
-        property.is_favorite = false
-      }
+      setProperties(tmpProperties.data.map((property: PropertyType) => {
+        if (tmpProperties.favorites.includes(property.id)) {
+          property.is_favorite = true
+        } else {
+          property.is_favorite = false
+        }
 
-      return property
-    }));
+        return property
+      }));
+    } catch (error) {
+      console.error("Failed to fetch properties:", error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   useEffect(() => {
     getProperties();
+    console.log({ params });
   }, [category, searchModal.query, params]);
+
+  // Loading State with local cat image
+    if (isLoading) {
+      return (
+        <div className="col-span-full flex flex-col items-center justify-center text-center">
+          <div className="relative h-[50vh] w-full mb-6">
+            <Image
+              src="/loading-cat.png"
+              alt="Loading properties..."
+              fill
+              className="object-contain animate-pulse"
+            />
+          </div>
+          <p className="text-3xl font-bold text-gray-500 mb-3">Looking for properties...</p>
+        </div>
+      );
+    }
+
+    // Empty State with local cat image
+    if (properties.length === 0) {
+      console.log("NO PROPERTIES")
+      return (
+        <div className="col-span-full flex flex-col items-center justify-center text-center">
+          <div className="relative h-[50vh] w-full mb-4">
+            <Image
+              src="/empty-cat.webp"
+              alt="No properties found"
+              fill
+              className="object-contain"
+            />
+          </div>
+          <h2 className="text-3xl font-bold text-gray-800 mb-3">No properties found!</h2>
+          {/*<p className="text-gray-500 text-lg">Try adjusting your filters, searching a different location, or removing some guests.</p>*/}
+        </div>
+      );
+    }
 
   return (
     <>
